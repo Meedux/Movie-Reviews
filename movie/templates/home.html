@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <form action="">
+    <div class="mb-3">
+      <label class="form-label">Search for Movie</label>
+      <input type="text" name="searchMovie" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <p>Searching for {{searchResult}}</p>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for movie in movies %}
+      <div v-for="movie in movies" class="col">
+        <div class="card">
+          <img class="card-img-top" src="{{ movie.image.url }}" height="200" alt="movie poster">
+          <div class="card-body">
+            <h2 class="card-title fw-bold">{{ movie.title }}</h2>
+            <h3 class="card-text">{{ movie.description }}</h3>
+            {% if movie.url %}
+              <a class="btn btn-primary" href="{% url 'detail' movie.id %}">Movie Link</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+  <h2>Join our Mailing List</h2>
+  <form action="{% url 'signup' %}">
+    <div class="mb-3">
+      <label for="email" class="form-label">
+        Enter your Email:
+      </label>
+      <input type="email" name="email" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Subscribe!</button>
+  </form>
+</div>
+{% endblock content %}
